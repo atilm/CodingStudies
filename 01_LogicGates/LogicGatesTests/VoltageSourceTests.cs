@@ -1,5 +1,5 @@
 using FluentAssertions;
-using LogicGates;
+using LogicGates.BasicComponents;
 using NUnit.Framework;
 
 namespace LogicGatesTests

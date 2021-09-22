@@ -1,4 +1,4 @@
-namespace LogicGates
+namespace LogicGates.BasicComponents
 {
     public class LightBulb
     {

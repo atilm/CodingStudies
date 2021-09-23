@@ -2,9 +2,9 @@
 {
     public class VoltageSource
     {
-        public VoltageSource()
+        public VoltageSource(Voltage initialState = Voltage.On)
         {
-            SwitchOn();
+            Output.Set(initialState);
         }
 
         public void SwitchOn()
@@ -17,6 +17,6 @@
             Output.Set(Voltage.Off);
         }
 
-        public Output Output { get; } = new Output();
+        public Output Output { get; } = new();
     }
 }

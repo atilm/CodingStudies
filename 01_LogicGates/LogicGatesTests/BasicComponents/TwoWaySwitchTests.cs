@@ -1,7 +1,7 @@
 ﻿using LogicGates.BasicComponents;
 using NUnit.Framework;
 
-namespace LogicGatesTests
+namespace LogicGatesTests.BasicComponents
 {
     [TestFixture]
     public class TwoWaySwitchTests

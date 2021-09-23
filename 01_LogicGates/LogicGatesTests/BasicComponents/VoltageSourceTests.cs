@@ -2,7 +2,7 @@ using FluentAssertions;
 using LogicGates.BasicComponents;
 using NUnit.Framework;
 
-namespace LogicGatesTests
+namespace LogicGatesTests.BasicComponents
 {
     public class Tests
     {

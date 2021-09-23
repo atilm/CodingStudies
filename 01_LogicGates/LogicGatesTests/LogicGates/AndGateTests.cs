@@ -1,5 +1,6 @@
 ﻿using LogicGates.BasicComponents;
 using LogicGates.LogicGates;
+using LogicGatesTests.BasicComponents;
 using NUnit.Framework;
 
 namespace LogicGatesTests.LogicGates

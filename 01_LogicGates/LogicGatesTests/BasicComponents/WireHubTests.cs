@@ -15,10 +15,10 @@ namespace LogicGatesTests.BasicComponents
             var bulbs = Enumerable.Range(0, 2).Select(_ => new LightBulb()).ToList();
 
             foreach (var source in sources)
-                hub.ConnectOutput(source.Output);
+                hub.ConnectSourceOutput(source.Output);
 
-            foreach (var bulb in bulbs)
-                hub.ConnectInput(bulb.Input);
+            foreach (var bulbOutput in bulbs.Select(OutputToBulb))
+                hub.ConnectTargetOutput(bulbOutput);
 
             bulbs.ShouldAllBeOff();
 
@@ -35,6 +35,13 @@ namespace LogicGatesTests.BasicComponents
             bulbs.ShouldAllBeOff();
         }
 
+        private Output OutputToBulb(LightBulb bulb)
+        {
+            var proxyOutput = new Output();
+            proxyOutput.Connect(bulb.Input);
+            return proxyOutput;
+        }
+
         [Test]
         public void WhenAnInputIsAddedToAnActiveHubItsStateIsSet()
         {
@@ -42,10 +49,10 @@ namespace LogicGatesTests.BasicComponents
             var bulb = new LightBulb();
             var source = new VoltageSource();
 
-            hub.ConnectInput(bulb.Input);
+            hub.ConnectTargetOutput(OutputToBulb(bulb));
             bulb.ShouldBeOff();
 
-            hub.ConnectOutput(source.Output);
+            hub.ConnectSourceOutput(source.Output);
             bulb.ShouldBeOn();
 
             source.SwitchOff();
@@ -59,8 +66,8 @@ namespace LogicGatesTests.BasicComponents
             var bulb = new LightBulb();
             var source = new VoltageSource();
 
-            hub.ConnectOutput(source.Output);
-            hub.ConnectInput(bulb.Input);
+            hub.ConnectSourceOutput(source.Output);
+            hub.ConnectTargetOutput(OutputToBulb(bulb));
             bulb.ShouldBeOn();
 
             source.SwitchOff();

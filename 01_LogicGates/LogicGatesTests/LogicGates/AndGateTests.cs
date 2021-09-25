@@ -11,17 +11,14 @@ namespace LogicGatesTests.LogicGates
         [Test]
         public void AndGateTest()
         {
-            var voltage1 = new VoltageSource();
-            var voltage2 = new VoltageSource();
+            var voltage1 = new VoltageSource(Voltage.Off);
+            var voltage2 = new VoltageSource(Voltage.Off);
             var lightBulb = new LightBulb();
-            var orGate = new AndGate();
-            
-            voltage1.SwitchOff();
-            voltage2.SwitchOff();
+            var andGate = new AndGate();
 
-            voltage1.Output.Connect(orGate.Input1);
-            voltage2.Output.Connect(orGate.Input2);
-            orGate.Output.Connect(lightBulb.Input);
+            voltage1.Output.Connect(andGate.Input1);
+            voltage2.Output.Connect(andGate.Input2);
+            andGate.Output.Connect(lightBulb.Input);
             
             lightBulb.ShouldBeOff();
 

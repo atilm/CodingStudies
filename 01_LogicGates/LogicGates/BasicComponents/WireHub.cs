@@ -5,43 +5,43 @@ namespace LogicGates.BasicComponents
 {
     public class WireHub
     {
-        public void ConnectInput(Input input)
+        public void ConnectTargetOutput(Output output)
         {
-            m_inputs.Add(input);
-            UpdateInputs();
+            _targetOutputs.Add(output);
+            UpdateOutputs();
         }
 
-        public void ConnectOutput(Output output)
+        public void ConnectSourceOutput(Output output)
         {
             var proxyInput = new Input();
-            proxyInput.RegisterAction(UpdateInputs);
+            proxyInput.RegisterAction(UpdateOutputs);
             output.Connect(proxyInput);
             
-            m_outputs.Add(output);
-            UpdateInputs();
+            _sourceOutputs.Add(output);
+            UpdateOutputs();
         }
 
-        private void UpdateInputs(Voltage _)
+        private void UpdateOutputs(Voltage _)
         {
-            UpdateInputs();
+            UpdateOutputs();
         }
         
-        private void UpdateInputs()
+        private void UpdateOutputs()
         {
             var voltage = DetermineSetVoltage();
             
-            foreach (var input in m_inputs)
-                input.Set(voltage);
+            foreach (var output in _targetOutputs)
+                output.Set(voltage);
         }
 
         private Voltage DetermineSetVoltage()
         {
-            return m_outputs.Any(o => o.Voltage == Voltage.On)
+            return _sourceOutputs.Any(o => o.Voltage == Voltage.On)
                 ? Voltage.On
                 : Voltage.Off;
         }
         
-        private List<Output> m_outputs = new();
-        private List<Input> m_inputs = new();
+        private readonly List<Output> _sourceOutputs = new();
+        private readonly List<Output> _targetOutputs = new();
     }
 }

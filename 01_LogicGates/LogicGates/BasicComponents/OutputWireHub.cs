@@ -1,42 +1,19 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace LogicGates.BasicComponents
+﻿namespace LogicGates.BasicComponents
 {
-    public class OutputWireHub
+    public class OutputWireHub : WireHubBase<Output>
     {
         public void ConnectTargetOutput(Output output)
         {
-            _targetOutputs.Add(output);
-            UpdateOutputs();
+            TargetInterfaces.Add(output);
+            UpdateTargets();
         }
 
         public void ConnectSourceOutput(Output output)
         {
+            SourceInterfaces.Add(output);
             var proxyInput = new Input();
-            proxyInput.RegisterAction(_ => UpdateOutputs());
             output.Connect(proxyInput);
-            
-            _sourceOutputs.Add(output);
-            UpdateOutputs();
+            proxyInput.RegisterAction(_ => UpdateTargets());
         }
-
-        private void UpdateOutputs()
-        {
-            var voltage = DetermineSetVoltage();
-            
-            foreach (var output in _targetOutputs)
-                output.Set(voltage);
-        }
-
-        private Voltage DetermineSetVoltage()
-        {
-            return _sourceOutputs.Any(o => o.Voltage == Voltage.On)
-                ? Voltage.On
-                : Voltage.Off;
-        }
-        
-        private readonly List<Output> _sourceOutputs = new();
-        private readonly List<Output> _targetOutputs = new();
     }
 }

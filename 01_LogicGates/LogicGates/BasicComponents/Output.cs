@@ -2,11 +2,11 @@ using System.Collections.Generic;
 
 namespace LogicGates.BasicComponents
 {
-    public class Output
+    public class Output : IVoltageInterface
     {
         public void Connect(Input input)
         {
-            m_inputs.Add(input);
+            _inputs.Add(input);
             input.Set(Voltage);
         }
 
@@ -14,12 +14,12 @@ namespace LogicGates.BasicComponents
         {
             Voltage = voltage;
 
-            foreach (var input in m_inputs)
+            foreach (var input in _inputs)
                 input.Set(Voltage);         
         }
         
         public Voltage Voltage { get; private set; } = Voltage.Off;
 
-        private readonly IList<Input> m_inputs = new List<Input>();
+        private readonly IList<Input> _inputs = new List<Input>();
     }
 }

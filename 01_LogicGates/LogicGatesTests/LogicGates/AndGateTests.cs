@@ -1,6 +1,6 @@
-﻿using LogicGates.BasicComponents;
+﻿using FluentAssertions;
+using LogicGates.BasicComponents;
 using LogicGates.LogicGates;
-using LogicGatesTests.BasicComponents;
 using NUnit.Framework;
 
 namespace LogicGatesTests.LogicGates
@@ -9,31 +9,22 @@ namespace LogicGatesTests.LogicGates
     public class AndGateTests
     {
         [Test]
-        public void AndGateTest()
+        [TestCase(Voltage.Off, Voltage.Off, LightBulb.BulbState.Off)]
+        [TestCase(Voltage.On, Voltage.Off, LightBulb.BulbState.Off)]
+        [TestCase(Voltage.Off, Voltage.On, LightBulb.BulbState.Off)]
+        [TestCase(Voltage.On, Voltage.On, LightBulb.BulbState.On)]
+        public void AndGateTest(Voltage voltage1, Voltage voltage2, LightBulb.BulbState expectedBulbState)
         {
-            var voltage1 = new VoltageSource(Voltage.Off);
-            var voltage2 = new VoltageSource(Voltage.Off);
+            var source1 = new VoltageSource(voltage1);
+            var source2 = new VoltageSource(voltage2);
             var lightBulb = new LightBulb();
-            var andGate = new AndGate();
+            var orGate = new AndGate();
 
-            voltage1.Output.Connect(andGate.Input1);
-            voltage2.Output.Connect(andGate.Input2);
-            andGate.Output.Connect(lightBulb.Input);
-            
-            lightBulb.ShouldBeOff();
+            source1.Output.Connect(orGate.Input1);
+            source2.Output.Connect(orGate.Input2);
+            orGate.Output.Connect(lightBulb.Input);
 
-            voltage1.SwitchOn();
-            lightBulb.ShouldBeOff();
-            voltage1.SwitchOff();
-            
-            voltage2.SwitchOn();
-            lightBulb.ShouldBeOff();
-            
-            voltage1.SwitchOn();
-            lightBulb.ShouldBeOn();
-            
-            voltage2.SwitchOff();
-            lightBulb.ShouldBeOff();
+            lightBulb.State.Should().Be(expectedBulbState);
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace LogicGates.BasicComponents
 {
-    public class WireHub
+    public class OutputWireHub
     {
         public void ConnectTargetOutput(Output output)
         {
@@ -14,18 +14,13 @@ namespace LogicGates.BasicComponents
         public void ConnectSourceOutput(Output output)
         {
             var proxyInput = new Input();
-            proxyInput.RegisterAction(UpdateOutputs);
+            proxyInput.RegisterAction(_ => UpdateOutputs());
             output.Connect(proxyInput);
             
             _sourceOutputs.Add(output);
             UpdateOutputs();
         }
 
-        private void UpdateOutputs(Voltage _)
-        {
-            UpdateOutputs();
-        }
-        
         private void UpdateOutputs()
         {
             var voltage = DetermineSetVoltage();

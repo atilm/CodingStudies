@@ -8,7 +8,7 @@ namespace LogicGates.BasicComponents
         public void RegisterAction(Action<Voltage> action)
         {
             m_actions.Add(action);
-            action(_mVoltage);
+            action(Voltage);
         }
 
         public void UnregisterAction(Action<Voltage> action)
@@ -18,17 +18,18 @@ namespace LogicGates.BasicComponents
 
         public void Set(Voltage voltage)
         {
-            var previous = _mVoltage;
-            _mVoltage = voltage;
+            var previous = Voltage;
+            Voltage = voltage;
 
-            if (_mVoltage == previous)
+            if (Voltage == previous)
                 return;
 
             foreach (var action in m_actions)
-                action(_mVoltage);
+                action(Voltage);
         }
+        
+        public Voltage Voltage { get; private set; } = Voltage.Off;
 
         private readonly IList<Action<Voltage>> m_actions = new List<Action<Voltage>>();
-        private Voltage _mVoltage = Voltage.Off;
     }
 }

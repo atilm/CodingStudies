@@ -10,7 +10,7 @@ namespace LogicGatesTests.BasicComponents
         [Test]
         public void AWireHubImplementsALogicalOr()
         {
-            var hub = new WireHub();
+            var hub = new OutputWireHub();
             var sources = Enumerable.Range(0, 2).Select(_ => new VoltageSource(Voltage.Off)).ToList();
             var bulbs = Enumerable.Range(0, 2).Select(_ => new LightBulb()).ToList();
 
@@ -35,17 +35,10 @@ namespace LogicGatesTests.BasicComponents
             bulbs.ShouldAllBeOff();
         }
 
-        private Output OutputToBulb(LightBulb bulb)
-        {
-            var proxyOutput = new Output();
-            proxyOutput.Connect(bulb.Input);
-            return proxyOutput;
-        }
-
         [Test]
         public void WhenAnInputIsAddedToAnActiveHubItsStateIsSet()
         {
-            var hub = new WireHub();
+            var hub = new OutputWireHub();
             var bulb = new LightBulb();
             var source = new VoltageSource();
 
@@ -62,7 +55,7 @@ namespace LogicGatesTests.BasicComponents
         [Test]
         public void WhenAnOutputIsAddedToAnActiveHubItsStateIsSet()
         {
-            var hub = new WireHub();
+            var hub = new OutputWireHub();
             var bulb = new LightBulb();
             var source = new VoltageSource();
 
@@ -72,6 +65,13 @@ namespace LogicGatesTests.BasicComponents
 
             source.SwitchOff();
             bulb.ShouldBeOff();
+        }
+        
+        private Output OutputToBulb(LightBulb bulb)
+        {
+            var proxyOutput = new Output();
+            proxyOutput.Connect(bulb.Input);
+            return proxyOutput;
         }
     }
 }

@@ -23,7 +23,7 @@ namespace LogicGates.LogicGates
         
         private readonly Relay _relay1 = new();
         private readonly Relay _relay2 = new();
-        private readonly WireHub _hub = new();
+        private readonly OutputWireHub _hub = new();
         private readonly VoltageSource _source = new();
     }
 }

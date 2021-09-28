@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using LogicGates.BasicComponents;
+using LogicGatesTests.TestHelpers;
 using NUnit.Framework;
 
 namespace LogicGatesTests.BasicComponents

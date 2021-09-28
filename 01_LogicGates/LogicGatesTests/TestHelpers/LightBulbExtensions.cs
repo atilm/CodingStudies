@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using LogicGates.BasicComponents;
 
-namespace LogicGatesTests.BasicComponents
+namespace LogicGatesTests.TestHelpers
 {
     public static class LightBulbExtensions
     {

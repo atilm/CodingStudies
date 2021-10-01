@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using LogicGates.BasicComponents;
-using LogicGates.FunctionalComponents;
+using LogicGates.FunctionalComponents.Adders;
 
 namespace LogicGatesTests.TestHelpers
 {

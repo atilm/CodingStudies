@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using FluentAssertions;
-using LogicGates.FunctionalComponents;
+using LogicGates.FunctionalComponents.Adders;
 using LogicGatesTests.TestHelpers;
 using NUnit.Framework;
 

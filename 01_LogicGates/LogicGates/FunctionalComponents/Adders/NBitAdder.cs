@@ -2,7 +2,7 @@
 using System.Linq;
 using LogicGates.BasicComponents;
 
-namespace LogicGates.FunctionalComponents
+namespace LogicGates.FunctionalComponents.Adders
 {
     public class NBitAdder
     {

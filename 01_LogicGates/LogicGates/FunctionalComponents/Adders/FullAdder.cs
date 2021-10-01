@@ -1,7 +1,7 @@
 ﻿using LogicGates.BasicComponents;
 using LogicGates.LogicGates;
 
-namespace LogicGates.FunctionalComponents
+namespace LogicGates.FunctionalComponents.Adders
 {
     public class FullAdder
     {

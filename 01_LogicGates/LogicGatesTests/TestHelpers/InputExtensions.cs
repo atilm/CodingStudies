@@ -8,5 +8,11 @@ namespace LogicGatesTests.TestHelpers
         {
             input.Set(boolean == 0 ? Voltage.Off : Voltage.On);
         }
+
+        public static void SwitchOnOff(this Input input)
+        {
+            input.Set(Voltage.On);
+            input.Set(Voltage.Off);
+        }
     }
 }

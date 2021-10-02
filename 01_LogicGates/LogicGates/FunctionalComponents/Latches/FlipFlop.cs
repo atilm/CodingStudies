@@ -3,7 +3,7 @@ using LogicGates.LogicGates;
 
 namespace LogicGates.FunctionalComponents.Latches
 {
-    public class FlipFlop
+    public class FlipFlop : IFlipFlop
     {
         public FlipFlop()
         {

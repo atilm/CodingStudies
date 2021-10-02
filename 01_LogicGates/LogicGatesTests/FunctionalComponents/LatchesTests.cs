@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using LogicGates.BasicComponents;
 using LogicGates.FunctionalComponents.Latches;
+using LogicGatesTests.TestHelpers;
 using NUnit.Framework;
 
 namespace LogicGatesTests.FunctionalComponents
@@ -12,21 +13,38 @@ namespace LogicGatesTests.FunctionalComponents
         public void FlipFlopTest()
         {
             var flipFlop = new FlipFlop();
+            flipFlop.QShouldBe(Voltage.Off);
 
-            flipFlop.Q.Voltage.Should().Be(Voltage.Off);
-            flipFlop.QBar.Voltage.Should().Be(Voltage.On);
+            flipFlop.InputB.SwitchOnOff();
+            flipFlop.QShouldBe(Voltage.On);
+            
+            flipFlop.InputA.SwitchOnOff();
+            flipFlop.QShouldBe(Voltage.Off);
+        }
 
-            flipFlop.InputB.Set(Voltage.On);
-            flipFlop.InputB.Set(Voltage.Off);
+        [Test]
+        public void LevelTriggeredFlipFlopTest()
+        {
+            var flipFlop = new LevelTriggeredFlipFlop();
+            flipFlop.QShouldBe(Voltage.Off);
             
-            flipFlop.Q.Voltage.Should().Be(Voltage.On);
-            flipFlop.QBar.Voltage.Should().Be(Voltage.Off);
+            flipFlop.InputB.SwitchOnOff();
+            flipFlop.QShouldBe(Voltage.Off);
+
+            flipFlop.Clock.Set(Voltage.On);
             
-            flipFlop.InputA.Set(Voltage.On);
-            flipFlop.InputA.Set(Voltage.Off);
+            flipFlop.InputB.SwitchOnOff();
+            flipFlop.QShouldBe(Voltage.On);
             
-            flipFlop.Q.Voltage.Should().Be(Voltage.Off);
-            flipFlop.QBar.Voltage.Should().Be(Voltage.On);
+            flipFlop.Clock.Set(Voltage.Off);
+            
+            flipFlop.InputA.SwitchOnOff();
+            flipFlop.QShouldBe(Voltage.On);
+            
+            flipFlop.Clock.Set(Voltage.On);
+            
+            flipFlop.InputA.SwitchOnOff();
+            flipFlop.QShouldBe(Voltage.Off);
         }
     }
 }

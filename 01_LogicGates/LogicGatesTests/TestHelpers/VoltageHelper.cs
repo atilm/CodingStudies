@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Linq;
+using System.Text;
 using LogicGates.BasicComponents;
 
 namespace LogicGatesTests.TestHelpers
@@ -20,6 +21,15 @@ namespace LogicGatesTests.TestHelpers
                 .Cast<bool>()
                 .Select(b => b ? Voltage.On : Voltage.Off)
                 .ToArray();
+        }
+
+        public static string ToBitString(this Voltage[] voltages)
+        {
+            var stringBuilder = new StringBuilder();
+            return voltages
+                .Reverse()
+                .Aggregate(stringBuilder, (builder, voltage) => builder.Append(voltage == Voltage.Off ? "0" : "1"))
+                .ToString();
         }
     }
 }

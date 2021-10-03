@@ -1,6 +1,4 @@
-﻿using System;
-using FluentAssertions;
-using LogicGates.BasicComponents;
+﻿using LogicGates.BasicComponents;
 using LogicGates.FunctionalComponents.Latches;
 using LogicGatesTests.TestHelpers;
 using NUnit.Framework;
@@ -60,6 +58,32 @@ namespace LogicGatesTests.FunctionalComponents
             
             latch.Clock.SwitchOnOff();
             latch.OutputsShouldBe("0101".ToVoltageArray());
+        }
+
+        [Test]
+        public void EdgeTriggeredDataFlipFlopTest()
+        {
+            var flipFlop = new EdgeTriggeredDataFlipFlop();
+
+            flipFlop.QShouldBe(Voltage.Off);
+            
+            flipFlop.Data.Set(Voltage.On);
+            flipFlop.QShouldBe(Voltage.Off);
+            
+            flipFlop.Clock.Set(Voltage.On);
+            flipFlop.QShouldBe(Voltage.On);
+            flipFlop.Data.Set(Voltage.Off);
+            flipFlop.QShouldBe(Voltage.On);
+            
+            flipFlop.Clock.Set(Voltage.Off);
+            flipFlop.Clock.Set(Voltage.On);
+            flipFlop.QShouldBe(Voltage.Off);
+            
+            flipFlop.Data.Set(Voltage.On);
+            flipFlop.QShouldBe(Voltage.Off);
+            flipFlop.Clock.Set(Voltage.Off);
+            flipFlop.Clock.Set(Voltage.On);
+            flipFlop.QShouldBe(Voltage.On);
         }
     }
 }

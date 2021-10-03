@@ -14,5 +14,10 @@ namespace LogicGatesTests.TestHelpers
             input.Set(Voltage.On);
             input.Set(Voltage.Off);
         }
+
+        public static void Switch(this Input input)
+        {
+            input.Set(input.Voltage == Voltage.Off ? Voltage.On : Voltage.Off);
+        }
     }
 }

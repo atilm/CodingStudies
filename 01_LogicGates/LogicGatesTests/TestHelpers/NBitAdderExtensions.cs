@@ -26,11 +26,5 @@ namespace LogicGatesTests.TestHelpers
 
             input.Set(value);
         }
-
-        public static void OutputsShouldBe(this NBitAdder adder, Voltage[] bits)
-        {
-            for (var i = 0; i < bits.Length; i++)
-                adder.Output(i).Voltage.Should().Be(bits[i]);
-        }
     }
 }

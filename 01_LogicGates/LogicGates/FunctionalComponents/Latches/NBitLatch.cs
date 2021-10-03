@@ -4,7 +4,7 @@ using LogicGates.BasicComponents;
 
 namespace LogicGates.FunctionalComponents.Latches
 {
-    public class NBitLatch
+    public class NBitLatch : IIndexedOutputs
     {
         public NBitLatch(int bits)
         {

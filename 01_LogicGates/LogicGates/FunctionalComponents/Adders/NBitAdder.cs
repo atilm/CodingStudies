@@ -4,7 +4,7 @@ using LogicGates.BasicComponents;
 
 namespace LogicGates.FunctionalComponents.Adders
 {
-    public class NBitAdder
+    public class NBitAdder : IIndexedOutputs
     {
         public NBitAdder(int bitCount)
         {

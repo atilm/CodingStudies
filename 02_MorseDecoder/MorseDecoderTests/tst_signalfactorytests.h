@@ -1,25 +1,15 @@
-#ifndef TST_DECODERTESTS_H
-#define TST_DECODERTESTS_H
-
-#include <../MorseDecoder/morsedecoder.h>
-#include <gtest/gtest.h>
-#include <gmock/gmock-matchers.h>
-
+#ifndef TST_SIGNALFACTORYTESTS_H
+#define TST_SIGNALFACTORYTESTS_H
 
 #include <../MorseDecoder/signalinterval.h>
 #include <signalfactory.h>
+#include <gtest/gtest.h>
+#include <gmock/gmock-matchers.h>
+
 #include <vector>
 #include <tuple>
+using namespace std;
 using namespace testing;
-
-TEST(MorseDecoderTests, DecoderTests)
-{
-    auto decoder = MorseDecoder();
-
-    auto result = decoder.Add(7, 12);
-
-    EXPECT_EQ(result, 19);
-}
 
 TEST(SignalFactoryTests, CreateFromString)
 {
@@ -55,4 +45,4 @@ TEST(SignalFactoryTests, CreateFromString)
     }
 }
 
-#endif // TST_DECODERTESTS_H
+#endif // TST_SIGNALFACTORYTESTS_H
